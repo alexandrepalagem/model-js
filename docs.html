@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>ModelJS</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <!-- <link href="css/home.css" rel="stylesheet"> -->
+  <link href="css/markdown.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://rafaeleyng.github.io/model-js/">ModelJS</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="http://rafaeleyng.github.io/model-js/">Home</a>
+          </li>
+          <li>
+            <a href="http://rafaeleyng.github.io/model-js/get-started.html">Get started</a>
+          </li>
+          <li class="active">
+            <a href="http://rafaeleyng.github.io/model-js/docs.html">Docs</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<article class="markdown-body"><h1>
+<a id="user-content-modeljs-docs" class="anchor" href="#modeljs-docs" aria-hidden="true"><span class="octicon octicon-link"></span></a>ModelJS Docs</h1>
+
+<p><a href="https://github.com/rafaeleyng/model-js">Model-JS on GitHub</a></p>
+
+<h2>
+<a id="user-content-modeljs-constructor-reference" class="anchor" href="#modeljs-constructor-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>ModelJS constructor reference</h2>
+
+<h3>
+<a id="user-content-modeljsschema-config" class="anchor" href="#modeljsschema-config" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ModelJS(schema, config)</code>
+</h3>
+
+<p>ModelJS constructor.</p>
+
+<ul>
+<li>
+<code>schema</code>: { }. 
+
+<ul>
+<li>Keys are entity names and values are SchemaEntity objects.</li>
+</ul>
+</li>
+<li>
+<code>config</code>: { }.
+
+<ul>
+<li>Valid keys and values:
+
+<ul>
+<li>
+<code>storage</code>: <code>'localStorage'</code>, <code>'indexedDB'</code>, <code>'webSQL'</code>. <strong>Only <code>'localStorage'</code> is currently supported</strong> and is the default value.</li>
+<li>
+<code>pluralization</code>: object where keys are entity names and values are how you want them pluralized, if they don't follow the pattern of just adding an 's' at the end of the word.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Returns:</strong> The ModelJS object.</p>
+
+<h3>
+<a id="user-content-modeljsschemaentityattrs-relstoone-relstomany" class="anchor" href="#modeljsschemaentityattrs-relstoone-relstomany" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ModelJS.SchemaEntity(attrs, relsToOne, relsToMany)</code>
+</h3>
+
+<p>SchemaEntity objects constructor.</p>
+
+<ul>
+<li>
+<code>attrs</code>: [ String ]. Attributes names for a given entity.</li>
+<li>
+<code>relsToOne</code>: [ String ]. Names of other SchemaEntity to which this entity will have a 'to one' relationship'.</li>
+<li>
+<code>relsToMany</code>: [ String ]. Names of other SchemaEntity to which this entity will have a 'to many' relationship'.</li>
+</ul>
+
+<p><strong>Returns:</strong> SchemaEntity object.</p>
+
+<h2>
+<a id="user-content-modeljs-reference" class="anchor" href="#modeljs-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>ModelJS reference</h2>
+
+<h3>
+<a id="user-content-modeljssaveentity-data" class="anchor" href="#modeljssaveentity-data" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.save(entity, data)</code>
+</h3>
+
+<p>Inserts a record, or update (replace) a record if <code>data</code> contains an id of a existing record.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+<li>
+<code>data</code>: {} or ModelJSEntity object. Data to be stored. Only attributes that match the schema for that entity will be persisted.</li>
+</ul>
+
+<p><strong>Returns:</strong> ModelJSEntity object.</p>
+
+<h3>
+<a id="user-content-modeljsfindentity-id" class="anchor" href="#modeljsfindentity-id" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.find(entity, id)</code>
+</h3>
+
+<p>Retrieves a single record by its entity and id.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+<li>
+<code>id</code>: Number. Record id.</li>
+</ul>
+
+<p><strong>Returns:</strong> ModelJSEntity object or <code>undefined</code>.</p>
+
+<h3>
+<a id="user-content-modeljsallentity" class="anchor" href="#modeljsallentity" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.all(entity)</code>
+</h3>
+
+<p>Retrieves all records of an entity.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+</ul>
+
+<p><strong>Returns:</strong> [ ModelJSEntity ].</p>
+
+<h3>
+<a id="user-content-modeljscountentity" class="anchor" href="#modeljscountentity" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.count(entity)</code>
+</h3>
+
+<p>Counts the number of records of an entity.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+</ul>
+
+<p><strong>Returns:</strong> Number.</p>
+
+<h3>
+<a id="user-content-modeljsfirstentity" class="anchor" href="#modeljsfirstentity" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.first(entity)</code>
+</h3>
+
+<p>Retrieves the first record of an entity, ordered by id.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+</ul>
+
+<p><strong>Returns:</strong> ModelJSEntity object or <code>undefined</code>.</p>
+
+<h3>
+<a id="user-content-modeljslastentity" class="anchor" href="#modeljslastentity" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.last(entity)</code>
+</h3>
+
+<p>Retrieves the last record of an entity, ordered by id.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+</ul>
+
+<p><strong>Returns:</strong> ModelJSEntity object or <code>undefined</code>.</p>
+
+<h3>
+<a id="user-content-modeljspageentity-pagenumber-pagesize" class="anchor" href="#modeljspageentity-pagenumber-pagesize" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.page(entity, pageNumber, pageSize)</code>
+</h3>
+
+<p>Retrieves a page of records of an entity, ordered by id.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+<li>
+<code>pageNumber</code>: Number. The number of the desired page.</li>
+<li>
+<code>pageSize</code>: Number. The desired size for the page.</li>
+</ul>
+
+<p><strong>Returns:</strong> [ ModelJSEntity ].</p>
+
+<h3>
+<a id="user-content-modeljsfilterentity-filters" class="anchor" href="#modeljsfilterentity-filters" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.filter(entity, filters)</code>
+</h3>
+
+<p>Retrieves all records of an entity that match the filter function.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+<li>
+<code>filters</code>: Function. Function to filter the records.</li>
+</ul>
+
+<p><strong>Returns:</strong> [ ModelJSEntity ].</p>
+
+<h3>
+<a id="user-content-modeljsdeleteentity-id" class="anchor" href="#modeljsdeleteentity-id" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.delete(entity, id)</code>
+</h3>
+
+<p>Deletes a single record by its entity and id.</p>
+
+<ul>
+<li>
+<code>entity</code>: String. Entity name.</li>
+<li>
+<code>id</code>: Number. Record id.</li>
+</ul>
+
+<h3>
+<a id="user-content-modeljsaddtoaddthis-toobj" class="anchor" href="#modeljsaddtoaddthis-toobj" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.addTo(addThis, toObj)</code>
+</h3>
+
+<p>Adds an object as a <code>to many</code> relationship of another object.</p>
+
+<ul>
+<li>
+<code>addThis</code>: ModelJSEntity object. Object to be added as a <code>to many</code> relationship.</li>
+<li>
+<code>toObj</code>: ModelJSEntity object. Object that will receive <code>addThis</code> as a <code>to many</code> relationship.</li>
+</ul>
+
+<h3>
+<a id="user-content-modeljsremovefromremovethis-fromobj" class="anchor" href="#modeljsremovefromremovethis-fromobj" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.removeFrom(removeThis, fromObj)</code>
+</h3>
+
+<p>Removes an object as a <code>to many</code> relationship of another object.</p>
+
+<ul>
+<li>
+<code>removeThis</code>: ModelJSEntity object. Object to be removed as a <code>to many</code> relationship.</li>
+<li>
+<code>fromObj</code>: ModelJSEntity object. Object that will lose <code>removeThis</code> as a <code>to many</code> relationship.</li>
+</ul>
+
+<h3>
+<a id="user-content-modeljsrelatedtorelated-toobj" class="anchor" href="#modeljsrelatedtorelated-toobj" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.relatedTo(related, toObj)</code>
+</h3>
+
+<p>Indicates whether an object is related to another as a <code>to many</code> relationship.</p>
+
+<ul>
+<li>
+<code>related</code>: ModelJSEntity object. Object you want to know whether is related to <code>toObj</code>.</li>
+<li>
+<code>toObj</code>: ModelJSEntity object. Object you want to know whether <code>related</code> is related to.</li>
+</ul>
+
+<p><strong>Returns:</strong> Boolean.</p>
+
+<h3>
+<a id="user-content-modeljssameobj1-obj2" class="anchor" href="#modeljssameobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.same(obj1, obj2)</code>
+</h3>
+
+<p>Indicates whether <code>obj1</code> and <code>obj2</code> refer to the same record of the same entity.</p>
+
+<ul>
+<li>
+<code>obj1</code>: ModelJSEntity object.</li>
+<li>
+<code>obj2</code>: ModelJSEntity object.</li>
+</ul>
+
+<p><strong>Returns:</strong> Boolean.</p>
+
+<h3>
+<a id="user-content-modeljsequalsobj1-obj2" class="anchor" href="#modeljsequalsobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljs.equals(obj1, obj2)</code>
+</h3>
+
+<p>Indicates whether <code>obj1</code> and <code>obj2</code> have the same values for all of its attributes, <em>not considering</em> the <code>id</code> attribute.</p>
+
+<ul>
+<li>
+<code>obj1</code>: ModelJSEntity object.</li>
+<li>
+<code>obj2</code>: ModelJSEntity object.</li>
+</ul>
+
+<p><strong>Returns:</strong> Boolean.</p>
+
+<h2>
+<a id="user-content-modeljsentity-objects-reference" class="anchor" href="#modeljsentity-objects-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>ModelJSEntity objects reference</h2>
+
+<h3>
+<a id="user-content-modeljsentitysave" class="anchor" href="#modeljsentitysave" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljsEntity.save()</code>
+</h3>
+
+<p>Saves an object to the storage. Equivalent to <code>modeljs.save(entity, modeljsEntity)</code>. Only makes sense for updates, because requires an already existing ModelJSEntity object, which is returned by <code>modeljs.save(...)</code> or by one of <code>modeljs</code> retrieval methods.</p>
+
+<h3>
+<a id="user-content-modeljsentitydelete" class="anchor" href="#modeljsentitydelete" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>modeljsEntity.delete()</code>
+</h3>
+
+<p>Deletes an object from the storage. Equivalent to <code>modeljs.delete(entity, modeljsEntity.id)</code>. Only makes sense for an already existing ModelJSEntity object, which is returned by <code>modeljs.save(...)</code> or by one of <code>modeljs</code> retrieval methods.</p>
+</article>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
