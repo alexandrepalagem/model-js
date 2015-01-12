@@ -1,13 +1,18 @@
 body {
-  width: 45em;
+  width: 52em;
   border: 1px solid #ddd;
   outline: 1300px solid #fff;
-  margin: 16px auto;
+  margin: 80px auto;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 body .markdown-body
 {
   padding: 30px;
+}
+
+code { 
+  color: #333;
 }
 
 @font-face {
@@ -20,7 +25,6 @@ body .markdown-body
   -webkit-text-size-adjust: 100%;
   color: #333;
   overflow: hidden;
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   word-wrap: break-word;
